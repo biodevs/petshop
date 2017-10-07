@@ -20,7 +20,9 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+  host: postgres
+  user: postgres
+  
 development:
   <<: *default
   database: petadmin_development
@@ -57,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: petadmin_test
+  database: petadmin_exchance_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: petadmin_production
-  username: petadmin
-  password: <%= ENV['PETADMIN_DATABASE_PASSWORD'] %>
+  database: petadmin_exchance_production
