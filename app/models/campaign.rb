@@ -5,10 +5,18 @@ class Campaign < ApplicationRecord
 
   
   validates :title, :body, presence: true
-    
+  
+  after_save :schedule_emails
+
   def fae_display_field
     title
   end
-
+  private
+    def schedule_emails
+      Client.all.each do |client|
+        CampaignClient.create(campaign: self, client: client)
+        CampaignJob.perform_later client, self.title, self.body
+      end
+    end
 
 end
